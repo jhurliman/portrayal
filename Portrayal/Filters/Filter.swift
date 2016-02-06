@@ -14,6 +14,14 @@ struct FilterSlider {
     let max: Float
     let defaultValue: Float
     var value: Float
+    
+    init(name: String, min: Float, max: Float, defaultValue: Float) {
+        self.name = name
+        self.min = min
+        self.max = max
+        self.defaultValue = defaultValue
+        self.value = defaultValue
+    }
 }
 
 protocol Filter {
@@ -22,13 +30,22 @@ protocol Filter {
     var sliders: [FilterSlider] { get }
     var gpuFilter: GPUImageFilterGroup { get }
     
+    func load(input: GPUImageOutput, output: GPUImageInput)
+    func unload()
     func updateImage(newImage: UIImage)
     func processImage()
-    func unload()
+    func sliderChanged(index: Int, value: Float)
 }
 
 extension Filter {
+    func load(input: GPUImageOutput, output: GPUImageInput) {
+        input.addTarget(gpuFilter)
+        gpuFilter.addTarget(output)
+    }
+    func unload() {
+        gpuFilter.removeAllTargets()
+    }
     func updateImage(newImage: UIImage) { }
     func processImage() { }
-    func unload() { gpuFilter.removeAllTargets() }
+    func sliderChanged(index: Int, value: Float) { }
 }

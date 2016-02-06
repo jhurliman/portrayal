@@ -47,12 +47,13 @@ class MainViewController : UIViewController,
     }
     
     func loadImage(image: UIImage) {
-        inputImage = GPUImagePicture(image: image, smoothlyScaleOutput: true)
+        let input = GPUImagePicture(image: image, smoothlyScaleOutput: true)
+        inputImage = input
         
         if let filter = currentFilter {
+//            filter.unload() // FIXME: Get unload working
+            filter.load(input, output: gpuImageView)
             filter.updateImage(image)
-            inputImage?.addTarget(filter.gpuFilter)
-            filter.gpuFilter.addTarget(gpuImageView)
         }
         
         updateImage()
@@ -74,23 +75,7 @@ class MainViewController : UIViewController,
     }
     
     @IBAction func sliderValueChanged(sender: UISlider) {
-        // FIXME: Use the fancy plugin system
-        let filter = currentFilter?.gpuFilter as! PencilSketchFilter
-        
-        switch (sender.tag) {
-        case 1:
-            filter.setSigmaE(CGFloat(sender.value))
-            break
-        case 2:
-            filter.setSigmaR(CGFloat(sender.value))
-            break
-        case 3:
-            filter.setSigmaSST(CGFloat(sender.value))
-            break
-        default:
-            return
-        }
-        
+        currentFilter?.sliderChanged(sender.tag, value: sender.value)
         updateImage()
     }
     
