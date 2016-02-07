@@ -29,6 +29,7 @@ class MainViewController : UIViewController,
     @IBOutlet weak var gpuImageView: GPUImageView!
     @IBOutlet weak var sliderCollectionView: UICollectionView!
     @IBOutlet weak var filterCollectionView: UICollectionView!
+    @IBOutlet weak var toolbar: UIToolbar!
     
     let picker = UIImagePickerController()
     var inputImage: UIImage?
@@ -40,6 +41,7 @@ class MainViewController : UIViewController,
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        toolbar.clipsToBounds = true
         currentFilter = FILTERS[0]
     }
     
