@@ -194,8 +194,10 @@ class MainViewController : UIViewController,
     {
         if (collectionView == sliderCollectionView) { return }
         
-        currentFilter?.unload()
         if let filter = FILTERS[safe: indexPath.item] {
+            if filter.name == currentFilter?.name { return }
+            
+            currentFilter?.unload()
             currentFilter = filter
             if let image = inputImage { loadImage(image) }
             sliderCollectionView.reloadData()
