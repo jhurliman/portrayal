@@ -10,7 +10,6 @@ import Inkwell
 
 class Comic : Filter {
     let bilateral: GPUImageBilateralFilter
-//    let equalization: GPUImageHistogramEqualizationFilter
     let saturation: GPUImageSaturationFilter
     let halftone: ColorHalftone
     let halftoneBlend: GPUImageLinearBurnBlendFilter
@@ -23,11 +22,12 @@ class Comic : Filter {
     
     let filterGroup: GPUImageFilterGroup
     var sliderArray: [FilterSlider] = [
-//        FilterSlider(name: "Bilateral", min: 0, max: 8, defaultValue: 4.0),
-//        FilterSlider(name: "Saturation", min: 0, max: 4, defaultValue: 2.0),
-//        FilterSlider(name: "?", min: 0, max: 8.0, defaultValue: 2.0),
-//        FilterSlider(name: "?", min: 0, max: 10.0, defaultValue: 5.0),
-//        FilterSlider(name: "SigmaR", min: 0, max: 10, defaultValue: 1.6)
+        FilterSlider(name: "Bilateral", min: 0, max: 8, defaultValue: 4.0),
+        FilterSlider(name: "Saturation", min: 0, max: 4, defaultValue: 2.0),
+        FilterSlider(name: "Dot Size", min: 0, max: 1.0, defaultValue: 0.3),
+        FilterSlider(name: "Threshold", min: 0, max: 1.0, defaultValue: 0.7),
+        FilterSlider(name: "Scale", min: 0.0001, max: 0.02, defaultValue: 0.01),
+        FilterSlider(name: "SigmaR", min: 0, max: 10, defaultValue: 1.6)
     ]
     
     init() {
@@ -93,7 +93,7 @@ class Comic : Filter {
     }
     
     var name: String { get { return "Comic" } }
-    var thumbnail: UIImage { get { return UIImage() } }
+    var thumbnail: UIImage { get { return UIImage(named: "thumbnail-comic@3x.jpg")! } }
     var sliders: [FilterSlider] {
         get { return sliderArray }
         set(newValue) { sliderArray = newValue }
@@ -113,6 +113,7 @@ class Comic : Filter {
     func updateImage(newImage: UIImage) {
         inkwell.setImageSize(newImage.pixelSize)
         paperBlend.setInputSize(newImage.pixelSize, atIndex: 0)
+        paperBlend.forceProcessingAtSize(newImage.pixelSize)
 //        paperTexture.addTarget(paperBlend, atTextureLocation: 0)
     }
     
@@ -121,6 +122,16 @@ class Comic : Filter {
     }
     
     func sliderChanged(index: Int, value: Float) {
+        switch (index) {
+        case 0: bilateral.distanceNormalizationFactor = CGFloat(value); break
+        case 1: saturation.saturation = CGFloat(value); break
+        case 2: halftone.setDotSize(value); break
+        case 3: halftone.setThreshold(value); break
+        case 4: halftone.setScale(value); break
+        case 5: inkwell.setSigmaR(CGFloat(value)); break
+        default: break
+        }
+        
     }
 }
 
@@ -130,6 +141,32 @@ class ColorHalftone : GPUImageFilter {
         let str = try! NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding)
         
         self.init(fragmentShaderFromString: str as String)
+        
+        setDotSize(0.3)
+        setThreshold(0.7)
+        setStepThresholdMin(0.6)
+        setStepThresholdMax(1.176)
+        setScale(0.01)
+    }
+    
+    func setDotSize(value: Float) {
+        setFloat(value, forUniformName: "dotSize")
+    }
+    
+    func setThreshold(value: Float) {
+        setFloat(value, forUniformName: "threshold")
+    }
+    
+    func setStepThresholdMin(value: Float) {
+        setFloat(value, forUniformName: "stepThresholdMin")
+    }
+    
+    func setStepThresholdMax(value: Float) {
+        setFloat(value, forUniformName: "stepThresholdMax")
+    }
+    
+    func setScale(value: Float) {
+        setFloat(value, forUniformName: "scale")
     }
 }
 
