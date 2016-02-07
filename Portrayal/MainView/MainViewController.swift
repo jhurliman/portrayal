@@ -33,6 +33,8 @@ class MainViewController : UIViewController,
     var inputGpuImage: GPUImagePicture?
     var currentFilter: Filter?
     
+    // MARK: - UIViewController Overrides
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,7 +54,7 @@ class MainViewController : UIViewController,
         sliderCollectionView.performBatchUpdates(nil, completion: nil)
     }
     
-    // MARK: - Helpers
+    // MARK: - Filter Helpers
     
     func reset() {
         inputGpuImage?.removeAllTargets()
@@ -91,6 +93,25 @@ class MainViewController : UIViewController,
     }
     
     @IBAction func saveTapped(sender: UIBarButtonItem) {
+        guard let filter = currentFilter else { return }
+        
+        // Render to a UIImage
+        filter.gpuFilter.useNextFrameForImageCapture()
+        updateImage()
+        guard let image = filter.gpuFilter.imageFromCurrentFramebuffer()
+            else { return }
+        
+        // Create share text based on the filter used
+        let verb: String
+        if filter is Pencil { verb = "Drawn" }
+        else if filter is Noir { verb = "Illustrated" }
+        else { verb = "Created" }
+        let text = NSString(string: "\(verb) in #Portrayal")
+        
+        // iOS share sheet
+        let activityViewController = UIActivityViewController(
+            activityItems: [text, image], applicationActivities: nil)
+        presentViewController(activityViewController, animated: true, completion: {})
     }
     
     func sliderValueChanged(sender: UISlider) {
