@@ -27,7 +27,7 @@ struct FilterSlider {
 protocol Filter {
     var name: String { get }
     var thumbnail: UIImage { get }
-    var sliders: [FilterSlider] { get }
+    var sliders: [FilterSlider] { get set }
     var gpuFilter: GPUImageFilterGroup { get }
     
     func load(input: GPUImageOutput, output: GPUImageInput)

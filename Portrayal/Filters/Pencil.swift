@@ -11,7 +11,7 @@ import Inkwell
 class Pencil : Filter {
     let pencilTexture: GPUImagePicture
     let filter: PencilSketchFilter
-    let sliderArray = [
+    var sliderArray = [
         FilterSlider(name: "SigmaE", min: 0, max: 10, defaultValue: 1),
         FilterSlider(name: "SigmaR", min: 0, max: 10, defaultValue: 1),
         FilterSlider(name: "SigmaSST", min: 0, max: 8, defaultValue: 2)
@@ -26,7 +26,10 @@ class Pencil : Filter {
     
     var name: String { get { return "Pencil" } }
     var thumbnail: UIImage { get { return UIImage() } }
-    var sliders: [FilterSlider] { get { return sliderArray } }
+    var sliders: [FilterSlider] {
+        get { return sliderArray }
+        set(newValue) { sliderArray = newValue }
+    }
     var gpuFilter: GPUImageFilterGroup { get { return filter } }
     
     func load(input: GPUImageOutput, output: GPUImageInput) {

@@ -10,25 +10,33 @@ import UIKit
 import Inkwell
 
 class MainViewController : UIViewController,
-    UINavigationControllerDelegate, UIImagePickerControllerDelegate,
-    UICollectionViewDelegate, UICollectionViewDataSource {
-    
+    UINavigationControllerDelegate,
+    UIImagePickerControllerDelegate,
+    UICollectionViewDelegate,
+    UICollectionViewDataSource,
+    UICollectionViewDelegateFlowLayout
+{
     let IMAGE_SIZES: [CGFloat] = [1024, 2048, 3072, 3584]
+    let SLIDER_CELL_HEIGHT = CGFloat(34)
+    let FILTER_CELL_SIZE = CGSize(width: 98, height: 128)
+    let FILTERS: [Filter] = [
+        Pencil(),
+        Noir()
+    ]
     
     @IBOutlet weak var gpuImageView: GPUImageView!
-    @IBOutlet weak var sliderLabel1: UILabel!
-    @IBOutlet weak var sliderLabel2: UILabel!
-    @IBOutlet weak var sliderLabel3: UILabel!
-    @IBOutlet weak var slider1: UISlider!
-    @IBOutlet weak var slider2: UISlider!
-    @IBOutlet weak var slider3: UISlider!
+    @IBOutlet weak var sliderCollectionView: UICollectionView!
+    @IBOutlet weak var filterCollectionView: UICollectionView!
     
     let picker = UIImagePickerController()
-    var inputImage: GPUImagePicture?
-    var currentFilter: Filter? = Pencil()
+    var inputImage: UIImage?
+    var inputGpuImage: GPUImagePicture?
+    var currentFilter: Filter?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        currentFilter = FILTERS[0]
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -40,19 +48,28 @@ class MainViewController : UIViewController,
         GPUImageContext.sharedFramebufferCache().purgeAllUnassignedFramebuffers()
     }
     
+    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+        sliderCollectionView.performBatchUpdates(nil, completion: nil)
+    }
+    
+    // MARK: - Helpers
+    
     func reset() {
-        inputImage?.removeAllTargets()
+        inputGpuImage?.removeAllTargets()
         gpuImageView.newFrameReadyAtTime(CMTime(), atIndex: 0)
         GPUImageContext.sharedFramebufferCache().purgeAllUnassignedFramebuffers()
     }
     
     func loadImage(image: UIImage) {
-        let input = GPUImagePicture(image: image, smoothlyScaleOutput: true)
-        inputImage = input
+        inputGpuImage?.removeAllTargets()
+        inputGpuImage = nil
+        
+        let gpuImage = GPUImagePicture(image: image, smoothlyScaleOutput: true)
+        inputImage = image
+        inputGpuImage = gpuImage
         
         if let filter = currentFilter {
-//            filter.unload() // FIXME: Get unload working
-            filter.load(input, output: gpuImageView)
+            filter.load(gpuImage, output: gpuImageView)
             filter.updateImage(image)
         }
         
@@ -60,9 +77,11 @@ class MainViewController : UIViewController,
     }
     
     func updateImage() {
-        inputImage?.processImage()
+        inputGpuImage?.processImage()
         currentFilter?.processImage()
     }
+    
+    // MARK: - UI Handlers
     
     @IBAction func cameraTapped(sender: UIBarButtonItem) {
         picker.delegate = self
@@ -74,10 +93,15 @@ class MainViewController : UIViewController,
     @IBAction func saveTapped(sender: UIBarButtonItem) {
     }
     
-    @IBAction func sliderValueChanged(sender: UISlider) {
-        currentFilter?.sliderChanged(sender.tag, value: sender.value)
+    func sliderValueChanged(sender: UISlider) {
+        guard var filter = currentFilter else { return }
+        
+        filter.sliderChanged(sender.tag, value: sender.value)
+        filter.sliders[safe: sender.tag]?.value = sender.value
         updateImage()
     }
+    
+    // MARK: - UIImagePickerController Handlers
     
     func imagePickerController(picker: UIImagePickerController,
         didFinishPickingMediaWithInfo info: [String: AnyObject])
@@ -93,14 +117,65 @@ class MainViewController : UIViewController,
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    // MARK: - UICollectionView Handlers
+    
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        if (collectionView == sliderCollectionView) {
+            return currentFilter?.sliders.count ?? 0
+        } else {
+            return FILTERS.count
+        }
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(
-            "FilterCell", forIndexPath: indexPath) as! FilterCell
+    func collectionView(collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize
+    {
+        if (collectionView == sliderCollectionView) {
+            return CGSize(width: collectionView.bounds.width, height: SLIDER_CELL_HEIGHT)
+        } else {
+            return FILTER_CELL_SIZE
+        }
+    }
+    
+    func collectionView(collectionView: UICollectionView,
+        cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
+    {
+        if (collectionView == sliderCollectionView) {
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(
+                "SliderCell", forIndexPath: indexPath)
+            guard let sliderCell = cell as? SliderCell else { return cell }
+            guard let slider = currentFilter?.sliders[safe: indexPath.item] else { return cell }
+            
+            sliderCell.name.text = slider.name
+            sliderCell.slider.minimumValue = slider.min
+            sliderCell.slider.maximumValue = slider.max
+            sliderCell.slider.value = slider.value
+            sliderCell.slider.tag = indexPath.item
+            sliderCell.controller = self
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(
+                "FilterCell", forIndexPath: indexPath)
+            guard let filterCell = cell as? FilterCell else { return cell }
+            guard let filter = FILTERS[safe: indexPath.item] else { return cell }
+            
+            filterCell.name.text = filter.name
+            filterCell.image.image = filter.thumbnail
+            return cell
+        }
+    }
+    
+    func collectionView(collectionView: UICollectionView,
+        didSelectItemAtIndexPath indexPath: NSIndexPath)
+    {
+        if (collectionView == sliderCollectionView) { return }
         
-        return cell
+        currentFilter?.unload()
+        if let filter = FILTERS[safe: indexPath.item] {
+            currentFilter = filter
+            if let image = inputImage { loadImage(image) }
+            sliderCollectionView.reloadData()
+        }
     }
 }
