@@ -21,6 +21,7 @@ class MainViewController : UIViewController,
     let FILTER_CELL_SIZE = CGSize(width: 98, height: 128)
     let FILTERS: [Filter] = [
         Pencil(),
+        Comic(),
         Dream(),
         Noir()
     ]
@@ -129,7 +130,7 @@ class MainViewController : UIViewController,
         didFinishPickingMediaWithInfo info: [String: AnyObject])
     {
         let image = (info[UIImagePickerControllerOriginalImage] as! UIImage)
-            .resizeTo(IMAGE_SIZES[1])
+            .resizeTo(IMAGE_SIZES[0])
         
         reset()
         picker.dismissViewControllerAnimated(true) { self.loadImage(image) }
