@@ -21,6 +21,7 @@ class MainViewController : UIViewController,
     let FILTER_CELL_SIZE = CGSize(width: 98, height: 128)
     let FILTERS: [Filter] = [
         Pencil(),
+        Dream(),
         Noir()
     ]
     
@@ -75,10 +76,10 @@ class MainViewController : UIViewController,
             filter.updateImage(image)
         }
         
-        updateImage()
+        processImage()
     }
     
-    func updateImage() {
+    func processImage() {
         inputGpuImage?.processImage()
         currentFilter?.processImage()
     }
@@ -97,7 +98,7 @@ class MainViewController : UIViewController,
         
         // Render to a UIImage
         filter.gpuFilter.useNextFrameForImageCapture()
-        updateImage()
+        processImage()
         guard let image = filter.gpuFilter.imageFromCurrentFramebuffer()
             else { return }
         
@@ -119,7 +120,7 @@ class MainViewController : UIViewController,
         
         filter.sliderChanged(sender.tag, value: sender.value)
         filter.sliders[safe: sender.tag]?.value = sender.value
-        updateImage()
+        processImage()
     }
     
     // MARK: - UIImagePickerController Handlers

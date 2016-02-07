@@ -6,7 +6,6 @@
 //  Copyright © 2016 John Hurliman. All rights reserved.
 //
 
-import Foundation
 import Inkwell
 
 class Noir : Filter {
@@ -28,7 +27,7 @@ class Noir : Filter {
     }
     
     var name: String { get { return "Noir" } }
-    var thumbnail: UIImage { get { return UIImage() } }
+    var thumbnail: UIImage { get { return UIImage(named: "thumbnail-noir@3x.jpg")! } }
     var sliders: [FilterSlider] {
         get { return sliderArray }
         set(newValue) { sliderArray = newValue }

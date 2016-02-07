@@ -25,6 +25,12 @@
 		9FE4B4401C65AA1300A4D1CC /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE4B43F1C65AA1300A4D1CC /* Array+Utils.swift */; };
 		9FE4B4421C66ADB400A4D1CC /* Noir.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE4B4411C66ADB400A4D1CC /* Noir.swift */; };
 		9FE4B4441C66DBDA00A4D1CC /* Noir.fragsh in Resources */ = {isa = PBXBuildFile; fileRef = 9FE4B4431C66DBDA00A4D1CC /* Noir.fragsh */; };
+		9FE4B4471C6732DB00A4D1CC /* thumbnail-noir@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9FE4B4451C6732DA00A4D1CC /* thumbnail-noir@3x.jpg */; };
+		9FE4B4481C6732DB00A4D1CC /* thumbnail-sketch@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9FE4B4461C6732DA00A4D1CC /* thumbnail-sketch@3x.jpg */; };
+		9FE4B44A1C67346300A4D1CC /* Dream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE4B4491C67346300A4D1CC /* Dream.swift */; };
+		9FE4B44C1C67353C00A4D1CC /* DarkenBlend.fragsh in Resources */ = {isa = PBXBuildFile; fileRef = 9FE4B44B1C67353C00A4D1CC /* DarkenBlend.fragsh */; };
+		9FE4B4501C67382B00A4D1CC /* LaplaceSketch.fragsh in Resources */ = {isa = PBXBuildFile; fileRef = 9FE4B44F1C67382B00A4D1CC /* LaplaceSketch.fragsh */; };
+		9FE4B4521C67475100A4D1CC /* thumbnail-dream@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9FE4B4511C67475100A4D1CC /* thumbnail-dream@3x.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +97,12 @@
 		9FE4B43F1C65AA1300A4D1CC /* Array+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Utils.swift"; sourceTree = "<group>"; };
 		9FE4B4411C66ADB400A4D1CC /* Noir.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Noir.swift; sourceTree = "<group>"; };
 		9FE4B4431C66DBDA00A4D1CC /* Noir.fragsh */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = Noir.fragsh; sourceTree = "<group>"; };
+		9FE4B4451C6732DA00A4D1CC /* thumbnail-noir@3x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "thumbnail-noir@3x.jpg"; sourceTree = "<group>"; };
+		9FE4B4461C6732DA00A4D1CC /* thumbnail-sketch@3x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "thumbnail-sketch@3x.jpg"; sourceTree = "<group>"; };
+		9FE4B4491C67346300A4D1CC /* Dream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dream.swift; sourceTree = "<group>"; };
+		9FE4B44B1C67353C00A4D1CC /* DarkenBlend.fragsh */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = DarkenBlend.fragsh; sourceTree = "<group>"; };
+		9FE4B44F1C67382B00A4D1CC /* LaplaceSketch.fragsh */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = LaplaceSketch.fragsh; sourceTree = "<group>"; };
+		9FE4B4511C67475100A4D1CC /* thumbnail-dream@3x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "thumbnail-dream@3x.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +135,9 @@
 			isa = PBXGroup;
 			children = (
 				9F6023801C642881004DA2F0 /* pencil-shading-01.jpg */,
+				9FE4B4511C67475100A4D1CC /* thumbnail-dream@3x.jpg */,
+				9FE4B4451C6732DA00A4D1CC /* thumbnail-noir@3x.jpg */,
+				9FE4B4461C6732DA00A4D1CC /* thumbnail-sketch@3x.jpg */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -196,7 +211,10 @@
 		9F6F400A1C63F5F9006E123B /* Filters */ = {
 			isa = PBXGroup;
 			children = (
+				9FE4B44B1C67353C00A4D1CC /* DarkenBlend.fragsh */,
+				9FE4B4491C67346300A4D1CC /* Dream.swift */,
 				9FE4B4391C6541FA00A4D1CC /* Filter.swift */,
+				9FE4B44F1C67382B00A4D1CC /* LaplaceSketch.fragsh */,
 				9FE4B4431C66DBDA00A4D1CC /* Noir.fragsh */,
 				9FE4B4411C66ADB400A4D1CC /* Noir.swift */,
 				9FE4B43B1C65447F00A4D1CC /* Pencil.swift */,
@@ -311,9 +329,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FE4B4471C6732DB00A4D1CC /* thumbnail-noir@3x.jpg in Resources */,
+				9FE4B4481C6732DB00A4D1CC /* thumbnail-sketch@3x.jpg in Resources */,
 				9F6023811C642881004DA2F0 /* pencil-shading-01.jpg in Resources */,
 				9F6F3FDE1C63DE6F006E123B /* LaunchScreen.storyboard in Resources */,
+				9FE4B4521C67475100A4D1CC /* thumbnail-dream@3x.jpg in Resources */,
 				9FE4B4441C66DBDA00A4D1CC /* Noir.fragsh in Resources */,
+				9FE4B4501C67382B00A4D1CC /* LaplaceSketch.fragsh in Resources */,
+				9FE4B44C1C67353C00A4D1CC /* DarkenBlend.fragsh in Resources */,
 				9F6F3FDB1C63DE6F006E123B /* Assets.xcassets in Resources */,
 				9F6F3FD91C63DE6F006E123B /* Main.storyboard in Resources */,
 			);
@@ -343,6 +366,7 @@
 				9F6F40241C63F7F7006E123B /* FilterCell.swift in Sources */,
 				9FE4B43E1C659D5900A4D1CC /* SliderCell.swift in Sources */,
 				9FE4B43A1C6541FA00A4D1CC /* Filter.swift in Sources */,
+				9FE4B44A1C67346300A4D1CC /* Dream.swift in Sources */,
 				9FE4B43C1C65447F00A4D1CC /* Pencil.swift in Sources */,
 				9F6F40251C63F7F7006E123B /* MainViewController.swift in Sources */,
 				9FE4B4421C66ADB400A4D1CC /* Noir.swift in Sources */,

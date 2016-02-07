@@ -30,7 +30,7 @@ class Pencil : Filter {
     }
     
     var name: String { get { return "Sketch" } }
-    var thumbnail: UIImage { get { return UIImage() } }
+    var thumbnail: UIImage { get { return UIImage(named: "thumbnail-sketch@3x.jpg")! } }
     var sliders: [FilterSlider] {
         get { return sliderArray }
         set(newValue) { sliderArray = newValue }

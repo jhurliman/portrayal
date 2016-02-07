@@ -1,0 +1,46 @@
+precision mediump float;
+
+varying vec2 textureCoordinate;
+
+uniform sampler2D inputImageTexture;
+uniform vec2 imageSize;
+uniform float threshold;
+uniform float luminanceOffset;
+
+float lookup(vec2 p, float dx, float dy) {
+    vec2 uv = p + (vec2(dx, dy) / imageSize);
+    vec4 c = texture2D(inputImageTexture, uv);
+    
+    // return as luma
+    return 0.2126*c.r + 0.7152*c.g + 0.0722*c.b;
+}
+
+float laplace(vec2 p) {
+    float d = 0.0;
+    
+    d += lookup(p,  0.0, -1.0);
+    d += lookup(p, -1.0,  0.0);
+    d += lookup(p,  1.0,  0.0);
+    d += lookup(p,  0.0,  1.0);
+    
+    return 4.0 * lookup(p, 0.0, 0.0) - d;
+}
+
+float laplaceSketch() {
+    float l = laplace(textureCoordinate);
+    
+    // TODO: Simplify this logic
+    if (l > -threshold && l < 0.0) l = 0.0;
+    else if (l < 0.0) l = abs(l);
+    else l = 0.0;
+    
+    if (l > 0.0) l = luminanceOffset - l;
+    else l = 1.0;
+    
+    return l;
+}
+
+void main() {
+    float gray = 1.0 - laplaceSketch();
+    gl_FragColor = vec4(vec3(gray), 1.0);
+}
