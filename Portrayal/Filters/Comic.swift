@@ -22,12 +22,11 @@ class Comic : Filter {
     
     let filterGroup: GPUImageFilterGroup
     var sliderArray: [FilterSlider] = [
-        FilterSlider(name: "Bilateral", min: 0, max: 8, defaultValue: 4.0),
+        FilterSlider(name: "Halftone", min: 0, max: 1.0, defaultValue: 0.7),
+        FilterSlider(name: "Dot Size", min: 0.001, max: 0.02, defaultValue: 0.01),
+        FilterSlider(name: "Lines", min: 0, max: 10, defaultValue: 1.6),
         FilterSlider(name: "Saturation", min: 0, max: 4, defaultValue: 2.0),
-        FilterSlider(name: "Dot Size", min: 0, max: 1.0, defaultValue: 0.3),
-        FilterSlider(name: "Threshold", min: 0, max: 1.0, defaultValue: 0.7),
-        FilterSlider(name: "Scale", min: 0.0001, max: 0.02, defaultValue: 0.01),
-        FilterSlider(name: "SigmaR", min: 0, max: 10, defaultValue: 1.6)
+        FilterSlider(name: "Smoothing", min: 0, max: 8, defaultValue: 4.0)
     ]
     
     init() {
@@ -100,21 +99,10 @@ class Comic : Filter {
     }
     var gpuFilter: GPUImageFilterGroup { get { return filterGroup } }
     
-    func load(input: GPUImageOutput, output: GPUImageInput) {
-        input.addTarget(filterGroup)
-        filterGroup.addTarget(output)
-    }
-    
-    func unload() {
-        filterGroup.removeAllTargets()
-//        paperTexture.removeAllTargets()
-    }
-    
     func updateImage(newImage: UIImage) {
         inkwell.setImageSize(newImage.pixelSize)
         paperBlend.setInputSize(newImage.pixelSize, atIndex: 0)
         paperBlend.forceProcessingAtSize(newImage.pixelSize)
-//        paperTexture.addTarget(paperBlend, atTextureLocation: 0)
     }
     
     func processImage() {
@@ -123,15 +111,13 @@ class Comic : Filter {
     
     func sliderChanged(index: Int, value: Float) {
         switch (index) {
-        case 0: bilateral.distanceNormalizationFactor = CGFloat(value); break
-        case 1: saturation.saturation = CGFloat(value); break
-        case 2: halftone.setDotSize(value); break
-        case 3: halftone.setThreshold(value); break
-        case 4: halftone.setScale(value); break
-        case 5: inkwell.setSigmaR(CGFloat(value)); break
+        case 0: halftone.setThreshold(value); break
+        case 1: halftone.setScale(value); break
+        case 2: inkwell.setSigmaR(CGFloat(value)); break
+        case 3: saturation.saturation = CGFloat(value); break
+        case 4: bilateral.distanceNormalizationFactor = CGFloat(value); break
         default: break
         }
-        
     }
 }
 
@@ -142,7 +128,7 @@ class ColorHalftone : GPUImageFilter {
         
         self.init(fragmentShaderFromString: str as String)
         
-        setDotSize(0.3)
+        setDotSize(0.4)
         setThreshold(0.7)
         setStepThresholdMin(0.6)
         setStepThresholdMax(1.176)
