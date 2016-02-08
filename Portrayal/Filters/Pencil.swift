@@ -19,7 +19,7 @@ class Pencil : Filter {
         FilterSlider(name: "Shade", min: -10, max: 100, defaultValue: 0),
         FilterSlider(name: "Right", min: -10, max: 100, defaultValue: 30),
         FilterSlider(name: "Left", min: -10, max: 100, defaultValue: 60),
-        FilterSlider(name: "Contrast", min: 0.01, max: 5, defaultValue: 0.08)
+        FilterSlider(name: "Contrast", min: 0.001, max: 2.5, defaultValue: 0.08)
     ]
     
     init() {

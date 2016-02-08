@@ -13,9 +13,9 @@ class Noir : Filter {
     let filterGroup: GPUImageFilterGroup
     var sliderArray = [
         FilterSlider(name: "Color", min: 0, max: 1, defaultValue: 1.0),
-        FilterSlider(name: "Threshold", min: 0, max: 0.5, defaultValue: 0.2),
-        FilterSlider(name: "Smoothing", min: 0, max: 1.0, defaultValue: 0.1),
-        FilterSlider(name: "Contrast", min: 0, max: 4.0, defaultValue: 1.4)
+        FilterSlider(name: "Cutoff", min: 0, max: 0.5, defaultValue: 0.2),
+        FilterSlider(name: "Bleed", min: 0, max: 1.0, defaultValue: 0.1),
+        FilterSlider(name: "Contrast", min: 0.2, max: 4.0, defaultValue: 1.4)
     ]
     
     init() {

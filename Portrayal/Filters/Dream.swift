@@ -25,10 +25,10 @@ class Dream : Filter {
     let filterGroup: GPUImageFilterGroup
     var sliderArray: [FilterSlider] = [
         FilterSlider(name: "Saturation", min: 0, max: 2, defaultValue: 1.3),
-        FilterSlider(name: "Contrast", min: 0, max: 4, defaultValue: 1.1),
+        FilterSlider(name: "Contrast", min: 0.2, max: 4, defaultValue: 1.1),
         FilterSlider(name: "Tracing", min: 0, max: 8.0, defaultValue: 2.0),
         FilterSlider(name: "Glow", min: 0, max: 10.0, defaultValue: 5.0),
-        FilterSlider(name: "Ink", min: 0, max: 0.25, defaultValue: 4.0 / 255.0),
+        FilterSlider(name: "Ink", min: 0, max: 38.0/255.0, defaultValue: 4.0/255.0),
         FilterSlider(name: "Cleanup", min: 0, max: 1.0, defaultValue: 0.8)
     ]
     
