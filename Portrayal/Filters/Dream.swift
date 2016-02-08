@@ -26,10 +26,10 @@ class Dream : Filter {
     var sliderArray: [FilterSlider] = [
         FilterSlider(name: "Saturation", min: 0, max: 2, defaultValue: 1.3),
         FilterSlider(name: "Contrast", min: 0.2, max: 4, defaultValue: 1.1),
-        FilterSlider(name: "Tracing", min: 0, max: 8.0, defaultValue: 2.0),
         FilterSlider(name: "Glow", min: 0, max: 10.0, defaultValue: 5.0),
-        FilterSlider(name: "Ink", min: 0, max: 38.0/255.0, defaultValue: 4.0/255.0),
-        FilterSlider(name: "Cleanup", min: 0, max: 1.0, defaultValue: 0.8)
+        FilterSlider(name: "Lines", min: 0, max: 8.0, defaultValue: 2.0),
+        FilterSlider(name: "Eraser", min: 0, max: 38.0/255.0, defaultValue: 4.0/255.0),
+        FilterSlider(name: "Brightness", min: 0, max: 1.0, defaultValue: 0.8)
     ]
     
     init() {
@@ -118,11 +118,11 @@ class Dream : Filter {
         switch (index) {
         case 0: saturation.saturation = cgValue; break
         case 1: contrast.contrast = cgValue; break
-        case 2: bilateral.distanceNormalizationFactor = cgValue; break
-        case 3: gaussian1.blurRadiusInPixels = cgValue
+        case 2: gaussian1.blurRadiusInPixels = cgValue
                 gaussian2.blurRadiusInPixels = cgValue
                 gaussian3.blurRadiusInPixels = cgValue
                 break
+        case 3: bilateral.distanceNormalizationFactor = cgValue; break
         case 4: edge.setThreshold(value); break
         case 5: edge.setLuminanceOffset(value); break
         default: break
