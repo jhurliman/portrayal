@@ -26,7 +26,7 @@ extension UIImage {
         // rotate if needed
         let oldWidth = self.size.width
         let oldHeight = self.size.height
-        let scaleFactor = size / max(oldWidth, oldHeight)
+        let scaleFactor = min(1.0, size / max(oldWidth, oldHeight))
         let newSize = CGSize(width: oldWidth * scaleFactor,
             height: oldHeight * scaleFactor)
         
