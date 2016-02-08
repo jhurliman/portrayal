@@ -20,9 +20,10 @@ class MainViewController : UIViewController,
     let SLIDER_CELL_HEIGHT = CGFloat(34)
     let FILTER_CELL_SIZE = CGSize(width: 98, height: 128)
     let FILTERS: [Filter] = [
+        Dream(),
         Pencil(),
         Comic(),
-        Dream(),
+        Lomo(),
         Noir()
     ]
     

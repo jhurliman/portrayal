@@ -37,6 +37,10 @@
 		9FE4B45A1C674FAD00A4D1CC /* texture-paper-01.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9FE4B4591C674FAD00A4D1CC /* texture-paper-01.jpg */; };
 		9FE4B45C1C67DE1900A4D1CC /* thumbnail-comic@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9FE4B45B1C67DE1900A4D1CC /* thumbnail-comic@3x.jpg */; };
 		9FE4B45E1C67E22800A4D1CC /* background-halftone.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FE4B45D1C67E22800A4D1CC /* background-halftone.png */; };
+		9FE4B4621C68575300A4D1CC /* Lomo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE4B4611C68575300A4D1CC /* Lomo.swift */; };
+		9FE4B4651C68587600A4D1CC /* lomo-lookup.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FE4B4631C68587600A4D1CC /* lomo-lookup.png */; };
+		9FE4B4661C68587600A4D1CC /* lomo-tonecurves.acv in Resources */ = {isa = PBXBuildFile; fileRef = 9FE4B4641C68587600A4D1CC /* lomo-tonecurves.acv */; };
+		9FE4B4681C686C8C00A4D1CC /* thumbnail-lomo@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9FE4B4671C686C8C00A4D1CC /* thumbnail-lomo@3x.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +119,10 @@
 		9FE4B4591C674FAD00A4D1CC /* texture-paper-01.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "texture-paper-01.jpg"; sourceTree = "<group>"; };
 		9FE4B45B1C67DE1900A4D1CC /* thumbnail-comic@3x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "thumbnail-comic@3x.jpg"; sourceTree = "<group>"; };
 		9FE4B45D1C67E22800A4D1CC /* background-halftone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-halftone.png"; sourceTree = "<group>"; };
+		9FE4B4611C68575300A4D1CC /* Lomo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lomo.swift; sourceTree = "<group>"; };
+		9FE4B4631C68587600A4D1CC /* lomo-lookup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lomo-lookup.png"; sourceTree = "<group>"; };
+		9FE4B4641C68587600A4D1CC /* lomo-tonecurves.acv */ = {isa = PBXFileReference; lastKnownFileType = file; path = "lomo-tonecurves.acv"; sourceTree = "<group>"; };
+		9FE4B4671C686C8C00A4D1CC /* thumbnail-lomo@3x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "thumbnail-lomo@3x.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,10 +155,13 @@
 			isa = PBXGroup;
 			children = (
 				9FE4B45D1C67E22800A4D1CC /* background-halftone.png */,
+				9FE4B4631C68587600A4D1CC /* lomo-lookup.png */,
+				9FE4B4641C68587600A4D1CC /* lomo-tonecurves.acv */,
 				9F6023801C642881004DA2F0 /* pencil-shading-01.jpg */,
 				9FE4B4591C674FAD00A4D1CC /* texture-paper-01.jpg */,
 				9FE4B45B1C67DE1900A4D1CC /* thumbnail-comic@3x.jpg */,
 				9FE4B4511C67475100A4D1CC /* thumbnail-dream@3x.jpg */,
+				9FE4B4671C686C8C00A4D1CC /* thumbnail-lomo@3x.jpg */,
 				9FE4B4451C6732DA00A4D1CC /* thumbnail-noir@3x.jpg */,
 				9FE4B4461C6732DA00A4D1CC /* thumbnail-sketch@3x.jpg */,
 			);
@@ -232,6 +243,7 @@
 				9FE4B4491C67346300A4D1CC /* Dream.swift */,
 				9FE4B4391C6541FA00A4D1CC /* Filter.swift */,
 				9FE4B44F1C67382B00A4D1CC /* LaplaceSketch.fragsh */,
+				9FE4B4611C68575300A4D1CC /* Lomo.swift */,
 				9FE4B4431C66DBDA00A4D1CC /* Noir.fragsh */,
 				9FE4B4411C66ADB400A4D1CC /* Noir.swift */,
 				9FE4B43B1C65447F00A4D1CC /* Pencil.swift */,
@@ -347,13 +359,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FE4B4651C68587600A4D1CC /* lomo-lookup.png in Resources */,
 				9FE4B45C1C67DE1900A4D1CC /* thumbnail-comic@3x.jpg in Resources */,
 				9FE4B4471C6732DB00A4D1CC /* thumbnail-noir@3x.jpg in Resources */,
 				9FE4B4481C6732DB00A4D1CC /* thumbnail-sketch@3x.jpg in Resources */,
 				9F6023811C642881004DA2F0 /* pencil-shading-01.jpg in Resources */,
 				9F6F3FDE1C63DE6F006E123B /* LaunchScreen.storyboard in Resources */,
 				9FE4B4561C67482200A4D1CC /* TextureBlend.fragsh in Resources */,
+				9FE4B4661C68587600A4D1CC /* lomo-tonecurves.acv in Resources */,
 				9FE4B4581C67483600A4D1CC /* ColorHalftone.fragsh in Resources */,
+				9FE4B4681C686C8C00A4D1CC /* thumbnail-lomo@3x.jpg in Resources */,
 				9FE4B4521C67475100A4D1CC /* thumbnail-dream@3x.jpg in Resources */,
 				9FE4B4441C66DBDA00A4D1CC /* Noir.fragsh in Resources */,
 				9FE4B4501C67382B00A4D1CC /* LaplaceSketch.fragsh in Resources */,
@@ -390,6 +405,7 @@
 				9FE4B43E1C659D5900A4D1CC /* SliderCell.swift in Sources */,
 				9FE4B43A1C6541FA00A4D1CC /* Filter.swift in Sources */,
 				9FE4B44A1C67346300A4D1CC /* Dream.swift in Sources */,
+				9FE4B4621C68575300A4D1CC /* Lomo.swift in Sources */,
 				9FE4B43C1C65447F00A4D1CC /* Pencil.swift in Sources */,
 				9F6F40251C63F7F7006E123B /* MainViewController.swift in Sources */,
 				9FE4B4421C66ADB400A4D1CC /* Noir.swift in Sources */,
