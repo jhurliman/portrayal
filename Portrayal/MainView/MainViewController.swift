@@ -31,6 +31,8 @@ class MainViewController : UIViewController,
     @IBOutlet weak var sliderCollectionView: UICollectionView!
     @IBOutlet weak var filterCollectionView: UICollectionView!
     @IBOutlet weak var toolbar: UIToolbar!
+    @IBOutlet weak var photoButton: UIBarButtonItem!
+    @IBOutlet weak var shareButton: UIBarButtonItem!
     
     let picker = UIImagePickerController()
     var inputImage: UIImage?
@@ -44,6 +46,12 @@ class MainViewController : UIViewController,
         
         toolbar.clipsToBounds = true
         currentFilter = FILTERS[0]
+        
+        photoButtonCTA()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -52,19 +60,38 @@ class MainViewController : UIViewController,
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        
         GPUImageContext.sharedFramebufferCache().purgeAllUnassignedFramebuffers()
     }
     
-    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
-        sliderCollectionView.performBatchUpdates(nil, completion: nil)
+    // MARK: - Misc Helpers
+    
+    func photoButtonCTA() {
+        guard let view = photoButton.valueForKey("view") as? UIView
+            else { return }
+        
+        view.layer.shadowColor = UIColor.whiteColor().CGColor
+        view.layer.shadowOffset = CGSize.zero
+        view.layer.shadowRadius = 8.0
+        view.layer.shadowOpacity = 0.0
+        
+        let animation = CABasicAnimation(keyPath: "shadowOpacity")
+        animation.fromValue = NSNumber(float: 0.0)
+        animation.toValue = NSNumber(float: 1.0)
+        animation.duration = 1.5
+        animation.autoreverses = true
+        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        animation.repeatCount = 10
+        animation.removedOnCompletion = true
+        view.layer.addAnimation(animation, forKey: "shadowOpacity")
     }
     
     // MARK: - Filter Helpers
     
     func reset() {
         inputGpuImage?.removeAllTargets()
+        // Reset the on-screen image
         gpuImageView.newFrameReadyAtTime(CMTime(), atIndex: 0)
-        GPUImageContext.sharedFramebufferCache().purgeAllUnassignedFramebuffers()
     }
     
     func loadImage(image: UIImage) {
@@ -81,6 +108,14 @@ class MainViewController : UIViewController,
         }
         
         processImage()
+        
+        // Show UI that is hidden when the app first starts
+        sliderCollectionView.hidden = false
+        shareButton.enabled = true
+        
+        // Now that the pipeline is up and running, drop any extra framebuffers
+        // we're not using
+        GPUImageContext.sharedFramebufferCache().purgeAllUnassignedFramebuffers()
     }
     
     func processImage() {
@@ -91,9 +126,14 @@ class MainViewController : UIViewController,
     // MARK: - UI Handlers
     
     @IBAction func cameraTapped(sender: UIBarButtonItem) {
+        // Cancel the call-to-action animation as soon as the camera button is
+        // tapped
+        if let view = photoButton.valueForKey("view") as? UIView {
+            view.layer.removeAnimationForKey("shadowOpacity")
+        }
+        
         picker.delegate = self
         picker.sourceType = .PhotoLibrary
-        
         presentViewController(picker, animated: true, completion: nil)
     }
     
