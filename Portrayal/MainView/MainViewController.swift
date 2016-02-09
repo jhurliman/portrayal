@@ -169,7 +169,10 @@ class MainViewController : UIViewController,
         
         // Create share text based on the filter used
         let verb: String
-        if filter is Pencil { verb = "Drawn" }
+        if filter is Dream { verb = "Painted" }
+        else if filter is Pencil { verb = "Sketched" }
+        else if filter is Comic { verb = "Drawn" }
+        else if filter is Lomo { verb = "Processed" }
         else if filter is Noir { verb = "Illustrated" }
         else { verb = "Created" }
         let text = NSString(string: "\(verb) in #Portrayal")
