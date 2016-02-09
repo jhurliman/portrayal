@@ -12,7 +12,7 @@ class Noir : Filter {
     let filter: NoirFilter
     let filterGroup: GPUImageFilterGroup
     var sliderArray = [
-        FilterSlider(name: "Color", min: 0, max: 1, defaultValue: 1.0),
+        FilterSlider(name: "Color", min: 0.01, max: 1, defaultValue: 1.0),
         FilterSlider(name: "Cutoff", min: 0, max: 0.5, defaultValue: 0.2),
         FilterSlider(name: "Bleed", min: 0, max: 1.0, defaultValue: 0.1),
         FilterSlider(name: "Contrast", min: 0.2, max: 4.0, defaultValue: 1.4)
@@ -38,7 +38,7 @@ class Noir : Filter {
         switch (index) {
         case 0:
             let color = UIColor(hue: CGFloat(value), saturation: 1.0,
-                brightness: 0.5, alpha: 1.0)
+                brightness: 1.0, alpha: 1.0)
             filter.setColor(color)
             break
         case 1:

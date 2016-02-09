@@ -11,22 +11,22 @@ float luma(vec3 color) {
     return dot(color, vec3(0.299, 0.587, 0.114));
 }
 
-vec2 rgbToCrCb(vec3 color) {
-    float Y = 0.2989*color.r + 0.5866*color.g + 0.1145*color.b;
+vec2 rgbToCbCr(vec3 color) {
+    float Y = luma(color);
+    float Cb = 0.5643 * (color.b - Y);
     float Cr = 0.7132 * (color.r - Y);
-    float Cb = 0.5647 * (color.b - Y);
-    return vec2(Cr, Cb);
+    return vec2(Cb, Cr);
 }
 
 vec4 contrastFilter(vec4 color) {
-    return vec4(contrast * (color.rgb - vec3(0.5)) + vec3(0.5), color.w);
+    return vec4((color.rgb - 0.5) * contrast + 0.5, color.w);
 }
 
 float chromaKey(vec4 textureColor, vec3 colorToPreserve) {
-    vec2 maskCrCb = rgbToCrCb(colorToPreserve);
-    vec2 crCb = rgbToCrCb(textureColor.rgb);
+    vec2 maskCbCr = rgbToCbCr(colorToPreserve);
+    vec2 cbCr = rgbToCbCr(textureColor.rgb);
     
-    float dist = distance(crCb, maskCrCb);
+    float dist = distance(cbCr, maskCbCr);
     return smoothstep(threshold, threshold + smoothing, dist);
 }
 
@@ -48,7 +48,7 @@ void main() {
     
     // Blend between grayscale and input color using the chroma key blend value.
     // This will preserve colors close to the chroma key color
-    vec3 rgbOut = mix(vec3(luminance), textureColor.rgb, 1.0 - blendValue);
+    vec3 rgbOut = mix(textureColor.rgb, vec3(luminance), blendValue);
     
     gl_FragColor = vec4(rgbOut, textureColor.w);
 }
