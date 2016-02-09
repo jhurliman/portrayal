@@ -41,6 +41,8 @@
 		9FE4B4651C68587600A4D1CC /* lomo-lookup.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FE4B4631C68587600A4D1CC /* lomo-lookup.png */; };
 		9FE4B4661C68587600A4D1CC /* lomo-tonecurves.acv in Resources */ = {isa = PBXBuildFile; fileRef = 9FE4B4641C68587600A4D1CC /* lomo-tonecurves.acv */; };
 		9FE4B4681C686C8C00A4D1CC /* thumbnail-lomo@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9FE4B4671C686C8C00A4D1CC /* thumbnail-lomo@3x.jpg */; };
+		9FE4B46A1C69B3C600A4D1CC /* icon-reset@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FE4B4691C69B3C600A4D1CC /* icon-reset@3x.png */; };
+		9FE4B46C1C69B62400A4D1CC /* ResetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE4B46B1C69B62400A4D1CC /* ResetCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,6 +125,8 @@
 		9FE4B4631C68587600A4D1CC /* lomo-lookup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lomo-lookup.png"; sourceTree = "<group>"; };
 		9FE4B4641C68587600A4D1CC /* lomo-tonecurves.acv */ = {isa = PBXFileReference; lastKnownFileType = file; path = "lomo-tonecurves.acv"; sourceTree = "<group>"; };
 		9FE4B4671C686C8C00A4D1CC /* thumbnail-lomo@3x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "thumbnail-lomo@3x.jpg"; sourceTree = "<group>"; };
+		9FE4B4691C69B3C600A4D1CC /* icon-reset@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-reset@3x.png"; sourceTree = "<group>"; };
+		9FE4B46B1C69B62400A4D1CC /* ResetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				9FE4B45D1C67E22800A4D1CC /* background-halftone.png */,
+				9FE4B4691C69B3C600A4D1CC /* icon-reset@3x.png */,
 				9FE4B4631C68587600A4D1CC /* lomo-lookup.png */,
 				9FE4B4641C68587600A4D1CC /* lomo-tonecurves.acv */,
 				9F6023801C642881004DA2F0 /* pencil-shading-01.jpg */,
@@ -229,6 +234,7 @@
 			children = (
 				9F6F40221C63F7F7006E123B /* FilterCell.swift */,
 				9F6F40231C63F7F7006E123B /* MainViewController.swift */,
+				9FE4B46B1C69B62400A4D1CC /* ResetCell.swift */,
 				9FE4B43D1C659D5900A4D1CC /* SliderCell.swift */,
 			);
 			path = MainView;
@@ -375,6 +381,7 @@
 				9FE4B44C1C67353C00A4D1CC /* DarkenBlend.fragsh in Resources */,
 				9FE4B45E1C67E22800A4D1CC /* background-halftone.png in Resources */,
 				9FE4B45A1C674FAD00A4D1CC /* texture-paper-01.jpg in Resources */,
+				9FE4B46A1C69B3C600A4D1CC /* icon-reset@3x.png in Resources */,
 				9F6F3FDB1C63DE6F006E123B /* Assets.xcassets in Resources */,
 				9F6F3FD91C63DE6F006E123B /* Main.storyboard in Resources */,
 			);
@@ -407,6 +414,7 @@
 				9FE4B44A1C67346300A4D1CC /* Dream.swift in Sources */,
 				9FE4B4621C68575300A4D1CC /* Lomo.swift in Sources */,
 				9FE4B43C1C65447F00A4D1CC /* Pencil.swift in Sources */,
+				9FE4B46C1C69B62400A4D1CC /* ResetCell.swift in Sources */,
 				9F6F40251C63F7F7006E123B /* MainViewController.swift in Sources */,
 				9FE4B4421C66ADB400A4D1CC /* Noir.swift in Sources */,
 				9FE4B4541C6747F200A4D1CC /* Comic.swift in Sources */,

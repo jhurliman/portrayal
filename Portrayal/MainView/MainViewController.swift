@@ -86,6 +86,27 @@ class MainViewController : UIViewController,
         view.layer.addAnimation(animation, forKey: "shadowOpacity")
     }
     
+    func resetCurrentSliders() {
+        guard var filter = currentFilter else { return }
+        
+        var i = 0
+        filter.sliders = filter.sliders.map {
+            (var slider: FilterSlider) -> FilterSlider in
+            slider.value = slider.defaultValue
+            
+            if let cell = sliderCollectionView.cellForItemAtIndexPath(
+                NSIndexPath(forItem: i, inSection: 0)) as? SliderCell
+            {
+                cell.slider.value = slider.value
+            }
+            filter.sliderChanged(i++, value: slider.value)
+            
+            return slider
+        }
+        
+        processImage()
+    }
+    
     // MARK: - Filter Helpers
     
     func reset() {
@@ -187,7 +208,8 @@ class MainViewController : UIViewController,
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if (collectionView == sliderCollectionView) {
-            return currentFilter?.sliders.count ?? 0
+            if let filter = currentFilter { return filter.sliders.count + 1 }
+            return 0
         } else {
             return FILTERS.count
         }
@@ -208,6 +230,14 @@ class MainViewController : UIViewController,
         cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
     {
         if (collectionView == sliderCollectionView) {
+            if indexPath.item == currentFilter?.sliders.count {
+                let cell = collectionView.dequeueReusableCellWithReuseIdentifier(
+                    "ResetCell", forIndexPath: indexPath)
+                guard let resetCell = cell as? ResetCell else { return cell }
+                resetCell.controller = self
+                return resetCell
+            }
+            
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier(
                 "SliderCell", forIndexPath: indexPath)
             guard let sliderCell = cell as? SliderCell else { return cell }
