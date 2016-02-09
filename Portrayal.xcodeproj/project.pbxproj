@@ -43,6 +43,7 @@
 		9FE4B4681C686C8C00A4D1CC /* thumbnail-lomo@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9FE4B4671C686C8C00A4D1CC /* thumbnail-lomo@3x.jpg */; };
 		9FE4B46A1C69B3C600A4D1CC /* icon-reset@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FE4B4691C69B3C600A4D1CC /* icon-reset@3x.png */; };
 		9FE4B46C1C69B62400A4D1CC /* ResetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE4B46B1C69B62400A4D1CC /* ResetCell.swift */; };
+		9FE4B46E1C69C90E00A4D1CC /* UIView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE4B46D1C69C90E00A4D1CC /* UIView+Utils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -127,6 +128,7 @@
 		9FE4B4671C686C8C00A4D1CC /* thumbnail-lomo@3x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "thumbnail-lomo@3x.jpg"; sourceTree = "<group>"; };
 		9FE4B4691C69B3C600A4D1CC /* icon-reset@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-reset@3x.png"; sourceTree = "<group>"; };
 		9FE4B46B1C69B62400A4D1CC /* ResetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetCell.swift; sourceTree = "<group>"; };
+		9FE4B46D1C69C90E00A4D1CC /* UIView+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Utils.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -207,6 +209,7 @@
 				9F6F3FD71C63DE6F006E123B /* Main.storyboard */,
 				9F6023821C6428F6004DA2F0 /* UIImage+Utils.swift */,
 				9FE4B43F1C65AA1300A4D1CC /* Array+Utils.swift */,
+				9FE4B46D1C69C90E00A4D1CC /* UIView+Utils.swift */,
 			);
 			path = Portrayal;
 			sourceTree = "<group>";
@@ -410,6 +413,7 @@
 			files = (
 				9F6F40241C63F7F7006E123B /* FilterCell.swift in Sources */,
 				9FE4B43E1C659D5900A4D1CC /* SliderCell.swift in Sources */,
+				9FE4B46E1C69C90E00A4D1CC /* UIView+Utils.swift in Sources */,
 				9FE4B43A1C6541FA00A4D1CC /* Filter.swift in Sources */,
 				9FE4B44A1C67346300A4D1CC /* Dream.swift in Sources */,
 				9FE4B4621C68575300A4D1CC /* Lomo.swift in Sources */,

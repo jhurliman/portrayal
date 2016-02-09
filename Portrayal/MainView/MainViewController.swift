@@ -36,6 +36,7 @@ class MainViewController : UIViewController,
     
     let picker = UIImagePickerController()
     var inputImage: UIImage?
+    var largeInputImage: UIImage?
     var inputGpuImage: GPUImagePicture?
     var currentFilter: Filter?
     
@@ -107,6 +108,16 @@ class MainViewController : UIViewController,
         processImage()
     }
     
+    func previewPixelSize(image: UIImage, maxDimension: CGFloat = 1024.0) -> CGSize {
+        let src = image.pixelSize
+        var dst = gpuImageView.pixelSize
+        dst.width = min(dst.width, maxDimension)
+        dst.height = min(dst.height, maxDimension)
+        let scale = min(dst.width / src.width, dst.height / src.height)
+        
+        return CGSize(width: src.width * scale, height: src.height * scale)
+    }
+    
     // MARK: - Filter Helpers
     
     func reset() {
@@ -160,12 +171,18 @@ class MainViewController : UIViewController,
     
     @IBAction func saveTapped(sender: UIBarButtonItem) {
         guard let filter = currentFilter else { return }
+        guard let largeInput = largeInputImage else { return }
+        guard let screenInput = inputImage else { return }
+        
+        loadImage(largeInput)
         
         // Render to a UIImage
         filter.gpuFilter.useNextFrameForImageCapture()
         processImage()
         guard let image = filter.gpuFilter.imageFromCurrentFramebuffer()
             else { return }
+        
+        loadImage(screenInput)
         
         // Create share text based on the filter used
         let verb: String
@@ -196,8 +213,9 @@ class MainViewController : UIViewController,
     func imagePickerController(picker: UIImagePickerController,
         didFinishPickingMediaWithInfo info: [String: AnyObject])
     {
-        let image = (info[UIImagePickerControllerOriginalImage] as! UIImage)
-            .resizeTo(IMAGE_SIZES[0])
+        let fullImage = (info[UIImagePickerControllerOriginalImage] as! UIImage)
+        largeInputImage = fullImage.resizeWithMaxDimension(IMAGE_SIZES[1])
+        let image = fullImage.resizeTo(previewPixelSize(fullImage))
         
         reset()
         picker.dismissViewControllerAnimated(true) { self.loadImage(image) }
