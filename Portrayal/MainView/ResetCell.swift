@@ -11,7 +11,7 @@ import UIKit
 class ResetCell : UICollectionViewCell {
     weak var controller: MainViewController?
     
-    @IBAction func resetTapped(sender: UIButton) {
+    @IBAction func resetTapped(_ sender: UIButton) {
         controller?.resetCurrentSliders()
     }
 }

@@ -17,8 +17,6 @@
 		9F6F3FF41C63DE70006E123B /* PortrayalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6F3FF31C63DE70006E123B /* PortrayalUITests.swift */; };
 		9F6F40241C63F7F7006E123B /* FilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6F40221C63F7F7006E123B /* FilterCell.swift */; };
 		9F6F40251C63F7F7006E123B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6F40231C63F7F7006E123B /* MainViewController.swift */; };
-		9FE4B4361C653AFE00A4D1CC /* Inkwell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FE4B4351C653AFE00A4D1CC /* Inkwell.framework */; };
-		9FE4B4381C653B0900A4D1CC /* Inkwell.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9FE4B4351C653AFE00A4D1CC /* Inkwell.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9FE4B43A1C6541FA00A4D1CC /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE4B4391C6541FA00A4D1CC /* Filter.swift */; };
 		9FE4B43C1C65447F00A4D1CC /* Pencil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE4B43B1C65447F00A4D1CC /* Pencil.swift */; };
 		9FE4B43E1C659D5900A4D1CC /* SliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE4B43D1C659D5900A4D1CC /* SliderCell.swift */; };
@@ -44,6 +42,8 @@
 		9FE4B46A1C69B3C600A4D1CC /* icon-reset@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FE4B4691C69B3C600A4D1CC /* icon-reset@3x.png */; };
 		9FE4B46C1C69B62400A4D1CC /* ResetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE4B46B1C69B62400A4D1CC /* ResetCell.swift */; };
 		9FE4B46E1C69C90E00A4D1CC /* UIView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE4B46D1C69C90E00A4D1CC /* UIView+Utils.swift */; };
+		9FE4B4861C69E26E00A4D1CC /* Inkwell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FE4B47D1C69E12600A4D1CC /* Inkwell.framework */; };
+		9FE4B4881C69E30700A4D1CC /* Inkwell.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9FE4B47D1C69E12600A4D1CC /* Inkwell.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,26 +61,23 @@
 			remoteGlobalIDString = 9F6F3FCF1C63DE6F006E123B;
 			remoteInfo = Portrayal;
 		};
+		9FE4B47C1C69E12600A4D1CC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9FE4B4781C69E12600A4D1CC /* Inkwell.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9F7728711C640D34007FB94B;
+			remoteInfo = Inkwell;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		9F6F40091C63F589006E123B /* Embed Frameworks */ = {
+		9FE4B4871C69E2EC00A4D1CC /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9FE4B4321C653A2700A4D1CC /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				9FE4B4381C653B0900A4D1CC /* Inkwell.framework in CopyFiles */,
+				9FE4B4881C69E30700A4D1CC /* Inkwell.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,7 +100,6 @@
 		9F6F3FF51C63DE70006E123B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9F6F40221C63F7F7006E123B /* FilterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterCell.swift; sourceTree = "<group>"; };
 		9F6F40231C63F7F7006E123B /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		9FE4B4351C653AFE00A4D1CC /* Inkwell.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Inkwell.framework; path = "../../Library/Developer/Xcode/DerivedData/Portrayal-gkqqixqkbdqwtkeppbqhdavqxouw/Build/Products/Debug-iphoneos/Inkwell.framework"; sourceTree = "<group>"; };
 		9FE4B4391C6541FA00A4D1CC /* Filter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		9FE4B43B1C65447F00A4D1CC /* Pencil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pencil.swift; sourceTree = "<group>"; };
 		9FE4B43D1C659D5900A4D1CC /* SliderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderCell.swift; sourceTree = "<group>"; };
@@ -129,6 +125,7 @@
 		9FE4B4691C69B3C600A4D1CC /* icon-reset@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-reset@3x.png"; sourceTree = "<group>"; };
 		9FE4B46B1C69B62400A4D1CC /* ResetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetCell.swift; sourceTree = "<group>"; };
 		9FE4B46D1C69C90E00A4D1CC /* UIView+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Utils.swift"; sourceTree = "<group>"; };
+		9FE4B4781C69E12600A4D1CC /* Inkwell.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Inkwell.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,7 +133,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9FE4B4361C653AFE00A4D1CC /* Inkwell.framework in Frameworks */,
+				9FE4B4861C69E26E00A4D1CC /* Inkwell.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -178,7 +175,7 @@
 		9F6F3FC71C63DE6F006E123B = {
 			isa = PBXGroup;
 			children = (
-				9FE4B4351C653AFE00A4D1CC /* Inkwell.framework */,
+				9FE4B4781C69E12600A4D1CC /* Inkwell.xcodeproj */,
 				9F6F3FD21C63DE6F006E123B /* Portrayal */,
 				9F6F3FE71C63DE70006E123B /* PortrayalTests */,
 				9F6F3FF21C63DE70006E123B /* PortrayalUITests */,
@@ -261,6 +258,14 @@
 			path = Filters;
 			sourceTree = "<group>";
 		};
+		9FE4B4791C69E12600A4D1CC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9FE4B47D1C69E12600A4D1CC /* Inkwell.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -270,9 +275,8 @@
 			buildPhases = (
 				9F6F3FCC1C63DE6F006E123B /* Sources */,
 				9F6F3FCD1C63DE6F006E123B /* Frameworks */,
+				9FE4B4871C69E2EC00A4D1CC /* CopyFiles */,
 				9F6F3FCE1C63DE6F006E123B /* Resources */,
-				9FE4B4321C653A2700A4D1CC /* CopyFiles */,
-				9F6F40091C63F589006E123B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -326,19 +330,22 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "John Hurliman";
 				TargetAttributes = {
 					9F6F3FCF1C63DE6F006E123B = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = 37UW6HK268;
+						LastSwiftMigration = 0830;
 					};
 					9F6F3FE31C63DE70006E123B = {
 						CreatedOnToolsVersion = 7.2.1;
+						LastSwiftMigration = 0830;
 						TestTargetID = 9F6F3FCF1C63DE6F006E123B;
 					};
 					9F6F3FEE1C63DE70006E123B = {
 						CreatedOnToolsVersion = 7.2.1;
+						LastSwiftMigration = 0830;
 						TestTargetID = 9F6F3FCF1C63DE6F006E123B;
 					};
 				};
@@ -354,6 +361,12 @@
 			mainGroup = 9F6F3FC71C63DE6F006E123B;
 			productRefGroup = 9F6F3FD11C63DE6F006E123B /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 9FE4B4791C69E12600A4D1CC /* Products */;
+					ProjectRef = 9FE4B4781C69E12600A4D1CC /* Inkwell.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				9F6F3FCF1C63DE6F006E123B /* Portrayal */,
@@ -362,6 +375,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		9FE4B47D1C69E12600A4D1CC /* Inkwell.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Inkwell.framework;
+			remoteRef = 9FE4B47C1C69E12600A4D1CC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		9F6F3FCE1C63DE6F006E123B /* Resources */ = {
@@ -492,8 +515,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -515,7 +540,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -537,8 +562,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -554,9 +581,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -569,16 +597,18 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 37UW6HK268;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Portrayal/Info.plist;
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.jhurliman.portrayal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = NO;
+				SWIFT_VERSION = 3.0;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
@@ -590,16 +620,18 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 37UW6HK268;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Portrayal/Info.plist;
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.jhurliman.portrayal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = NO;
+				SWIFT_VERSION = 3.0;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;
@@ -612,6 +644,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.jhurliman.PortrayalTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Portrayal.app/Portrayal";
 			};
 			name = Debug;
@@ -624,6 +657,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.jhurliman.PortrayalTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Portrayal.app/Portrayal";
 			};
 			name = Release;
@@ -635,6 +669,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.jhurliman.PortrayalUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = Portrayal;
 				USES_XCTRUNNER = YES;
 			};
@@ -647,6 +682,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.jhurliman.PortrayalUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = Portrayal;
 				USES_XCTRUNNER = YES;
 			};

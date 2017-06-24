@@ -18,7 +18,7 @@ extension Array {
                 if let v = newValue {
                     self[index] = v
                 } else {
-                    self.removeAtIndex(index)
+                    self.remove(at: index)
                 }
             }
         }

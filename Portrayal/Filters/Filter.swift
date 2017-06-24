@@ -30,22 +30,22 @@ protocol Filter {
     var sliders: [FilterSlider] { get set }
     var gpuFilter: GPUImageFilterGroup { get }
     
-    func load(input: GPUImageOutput, output: GPUImageInput)
+    func load(_ input: GPUImageOutput, output: GPUImageInput)
     func unload()
-    func updateImage(newImage: UIImage)
+    func updateImage(_ newImage: UIImage)
     func processImage()
-    func sliderChanged(index: Int, value: Float)
+    func sliderChanged(_ index: Int, value: Float)
 }
 
 extension Filter {
-    func load(input: GPUImageOutput, output: GPUImageInput) {
+    func load(_ input: GPUImageOutput, output: GPUImageInput) {
         input.addTarget(gpuFilter)
         gpuFilter.addTarget(output)
     }
     func unload() {
         gpuFilter.removeAllTargets()
     }
-    func updateImage(newImage: UIImage) { }
+    func updateImage(_ newImage: UIImage) { }
     func processImage() { }
-    func sliderChanged(index: Int, value: Float) { }
+    func sliderChanged(_ index: Int, value: Float) { }
 }

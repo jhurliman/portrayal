@@ -21,7 +21,7 @@ extension UIImage {
         }
     }
     
-    func resizeWithMaxDimension(size: CGFloat) -> UIImage {
+    func resizeWithMaxDimension(_ size: CGFloat) -> UIImage {
         // Resize to clamp max height/width (preserving aspect ratio, and
         // rotate if needed
         let oldWidth = self.size.width
@@ -33,12 +33,12 @@ extension UIImage {
         return self.resizeTo(newSize)
     }
     
-    func resizeTo(size: CGSize) -> UIImage {
+    func resizeTo(_ size: CGSize) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(size, false, self.scale)
-        self.drawInRect(CGRect(origin: CGPoint.zero, size: size))
+        self.draw(in: CGRect(origin: CGPoint.zero, size: size))
         let normalizedImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        return normalizedImage
+        return normalizedImage!
     }
 }

@@ -39,7 +39,7 @@ class Lomo : Filter {
         levels1 = GPUImageLevelsFilter()
         levels1.setMin(6.0/255.0, gamma: 0.90, max: 253.0/255.0, minOut: 0.07, maxOut: 0.85)
         
-        toneCurve = GPUImageToneCurveFilter(ACV: "lomo-tonecurves")
+        toneCurve = GPUImageToneCurveFilter(acv: "lomo-tonecurves")
         
         unsharpMask = GPUImageUnsharpMaskFilter()
         unsharpMask.blurRadiusInPixels = 2.0
@@ -100,7 +100,7 @@ class Lomo : Filter {
         lookupTexture.processImage()
     }
     
-    func sliderChanged(index: Int, value: Float) {
+    func sliderChanged(_ index: Int, value: Float) {
         let cgValue = CGFloat(value)
         
         switch (index) {

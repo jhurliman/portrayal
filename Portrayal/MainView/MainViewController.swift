@@ -51,12 +51,12 @@ class MainViewController : UIViewController,
         photoButtonCTA()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return .LightContent
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .lightContent
     }
     
     override func didReceiveMemoryWarning() {
@@ -68,23 +68,23 @@ class MainViewController : UIViewController,
     // MARK: - Misc Helpers
     
     func photoButtonCTA() {
-        guard let view = photoButton.valueForKey("view") as? UIView
+        guard let view = photoButton.value(forKey: "view") as? UIView
             else { return }
         
-        view.layer.shadowColor = UIColor.whiteColor().CGColor
+        view.layer.shadowColor = UIColor.white.cgColor
         view.layer.shadowOffset = CGSize.zero
         view.layer.shadowRadius = 8.0
         view.layer.shadowOpacity = 0.0
         
         let animation = CABasicAnimation(keyPath: "shadowOpacity")
-        animation.fromValue = NSNumber(float: 0.0)
-        animation.toValue = NSNumber(float: 1.0)
+        animation.fromValue = NSNumber(value: 0.0 as Float)
+        animation.toValue = NSNumber(value: 1.0 as Float)
         animation.duration = 1.5
         animation.autoreverses = true
         animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         animation.repeatCount = 10
-        animation.removedOnCompletion = true
-        view.layer.addAnimation(animation, forKey: "shadowOpacity")
+        animation.isRemovedOnCompletion = true
+        view.layer.add(animation, forKey: "shadowOpacity")
     }
     
     func resetCurrentSliders() {
@@ -92,23 +92,25 @@ class MainViewController : UIViewController,
         
         var i = 0
         filter.sliders = filter.sliders.map {
-            (var slider: FilterSlider) -> FilterSlider in
-            slider.value = slider.defaultValue
+            (slider: FilterSlider) -> FilterSlider in
+            var mutableSlider = slider
+            mutableSlider.value = slider.defaultValue
             
-            if let cell = sliderCollectionView.cellForItemAtIndexPath(
-                NSIndexPath(forItem: i, inSection: 0)) as? SliderCell
+            if let cell = sliderCollectionView.cellForItem(
+                at: IndexPath(item: i, section: 0)) as? SliderCell
             {
-                cell.slider.value = slider.value
+                cell.slider.value = mutableSlider.value
             }
-            filter.sliderChanged(i++, value: slider.value)
+            filter.sliderChanged(i, value: mutableSlider.value)
+            i = i + 1
             
-            return slider
+            return mutableSlider
         }
         
         processImage()
     }
-    
-    func previewPixelSize(image: UIImage, maxDimension: CGFloat = 1024.0) -> CGSize {
+  
+    func previewPixelSize(_ image: UIImage, maxDimension: CGFloat = 1024.0) -> CGSize {
         let src = image.pixelSize
         var dst = gpuImageView.pixelSize
         dst.width = min(dst.width, maxDimension)
@@ -123,10 +125,10 @@ class MainViewController : UIViewController,
     func reset() {
         inputGpuImage?.removeAllTargets()
         // Reset the on-screen image
-        gpuImageView.newFrameReadyAtTime(CMTime(), atIndex: 0)
+        gpuImageView.newFrameReady(at: CMTime(), at: 0)
     }
     
-    func loadImage(image: UIImage) {
+    func loadImage(_ image: UIImage) {
         inputGpuImage?.removeAllTargets()
         inputGpuImage = nil
         
@@ -135,15 +137,15 @@ class MainViewController : UIViewController,
         inputGpuImage = gpuImage
         
         if let filter = currentFilter {
-            filter.load(gpuImage, output: gpuImageView)
+            filter.load(gpuImage!, output: gpuImageView)
             filter.updateImage(image)
         }
         
         processImage()
         
         // Show UI that is hidden when the app first starts
-        sliderCollectionView.hidden = false
-        shareButton.enabled = true
+        sliderCollectionView.isHidden = false
+        shareButton.isEnabled = true
         
         // Now that the pipeline is up and running, drop any extra framebuffers
         // we're not using
@@ -157,19 +159,19 @@ class MainViewController : UIViewController,
     
     // MARK: - UI Handlers
     
-    @IBAction func cameraTapped(sender: UIBarButtonItem) {
+    @IBAction func cameraTapped(_ sender: UIBarButtonItem) {
         // Cancel the call-to-action animation as soon as the camera button is
         // tapped
-        if let view = photoButton.valueForKey("view") as? UIView {
-            view.layer.removeAnimationForKey("shadowOpacity")
+        if let view = photoButton.value(forKey: "view") as? UIView {
+            view.layer.removeAnimation(forKey: "shadowOpacity")
         }
         
         picker.delegate = self
-        picker.sourceType = .PhotoLibrary
-        presentViewController(picker, animated: true, completion: nil)
+        picker.sourceType = .photoLibrary
+        present(picker, animated: true, completion: nil)
     }
     
-    @IBAction func saveTapped(sender: UIBarButtonItem) {
+    @IBAction func saveTapped(_ sender: UIBarButtonItem) {
         guard let filter = currentFilter else { return }
         guard let largeInput = largeInputImage else { return }
         guard let screenInput = inputImage else { return }
@@ -197,10 +199,10 @@ class MainViewController : UIViewController,
         // iOS share sheet
         let activityViewController = UIActivityViewController(
             activityItems: [text, image], applicationActivities: nil)
-        presentViewController(activityViewController, animated: true, completion: {})
+        present(activityViewController, animated: true, completion: {})
     }
     
-    func sliderValueChanged(sender: UISlider) {
+    func sliderValueChanged(_ sender: UISlider) {
         guard var filter = currentFilter else { return }
         
         filter.sliderChanged(sender.tag, value: sender.value)
@@ -210,24 +212,24 @@ class MainViewController : UIViewController,
     
     // MARK: - UIImagePickerController Handlers
     
-    func imagePickerController(picker: UIImagePickerController,
-        didFinishPickingMediaWithInfo info: [String: AnyObject])
+    func imagePickerController(_ picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [String: Any])
     {
         let fullImage = (info[UIImagePickerControllerOriginalImage] as! UIImage)
         largeInputImage = fullImage.resizeWithMaxDimension(IMAGE_SIZES[1])
         let image = fullImage.resizeTo(previewPixelSize(fullImage))
         
         reset()
-        picker.dismissViewControllerAnimated(true) { self.loadImage(image) }
+        picker.dismiss(animated: true) { self.loadImage(image) }
     }
     
-    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        picker.dismissViewControllerAnimated(true, completion: nil)
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
     }
     
     // MARK: - UICollectionView Handlers
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if (collectionView == sliderCollectionView) {
             if let filter = currentFilter { return filter.sliders.count + 1 }
             return 0
@@ -236,9 +238,9 @@ class MainViewController : UIViewController,
         }
     }
     
-    func collectionView(collectionView: UICollectionView,
+    func collectionView(_ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
-        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize
+        sizeForItemAt indexPath: IndexPath) -> CGSize
     {
         if (collectionView == sliderCollectionView) {
             return CGSize(width: collectionView.bounds.width, height: SLIDER_CELL_HEIGHT)
@@ -247,20 +249,20 @@ class MainViewController : UIViewController,
         }
     }
     
-    func collectionView(collectionView: UICollectionView,
-        cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
+    func collectionView(_ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
     {
         if (collectionView == sliderCollectionView) {
             if indexPath.item == currentFilter?.sliders.count {
-                let cell = collectionView.dequeueReusableCellWithReuseIdentifier(
-                    "ResetCell", forIndexPath: indexPath)
+                let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: "ResetCell", for: indexPath)
                 guard let resetCell = cell as? ResetCell else { return cell }
                 resetCell.controller = self
                 return resetCell
             }
             
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(
-                "SliderCell", forIndexPath: indexPath)
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: "SliderCell", for: indexPath)
             guard let sliderCell = cell as? SliderCell else { return cell }
             guard let slider = currentFilter?.sliders[safe: indexPath.item] else { return cell }
             
@@ -272,8 +274,8 @@ class MainViewController : UIViewController,
             sliderCell.controller = self
             return cell
         } else {
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(
-                "FilterCell", forIndexPath: indexPath)
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: "FilterCell", for: indexPath)
             guard let filterCell = cell as? FilterCell else { return cell }
             guard let filter = FILTERS[safe: indexPath.item] else { return cell }
             
@@ -283,8 +285,8 @@ class MainViewController : UIViewController,
         }
     }
     
-    func collectionView(collectionView: UICollectionView,
-        didSelectItemAtIndexPath indexPath: NSIndexPath)
+    func collectionView(_ collectionView: UICollectionView,
+        didSelectItemAt indexPath: IndexPath)
     {
         if (collectionView == sliderCollectionView) { return }
         

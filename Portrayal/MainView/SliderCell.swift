@@ -14,7 +14,7 @@ class SliderCell : UICollectionViewCell {
     
     weak var controller: MainViewController?
     
-    @IBAction func sliderValueChanged(sender: UISlider) {
+    @IBAction func sliderValueChanged(_ sender: UISlider) {
         controller?.sliderValueChanged(sender)
     }
 }

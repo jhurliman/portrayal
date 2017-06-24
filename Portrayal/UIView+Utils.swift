@@ -12,7 +12,7 @@ extension UIView {
     var pixelSize: CGSize {
         get {
             var size = self.bounds.size
-            let scale = UIScreen.mainScreen().scale
+            let scale = UIScreen.main.scale
             
             size.width *= scale
             size.height *= scale

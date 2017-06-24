@@ -72,7 +72,7 @@ class Comic : Filter {
         paperTexture = GPUImagePicture(image: image, smoothlyScaleOutput: false)
         
         paperBlend = TextureBlend()
-        paperBlend.setInputSize(CGSize.zero, atIndex: 0)
+        paperBlend.setInputSize(CGSize.zero, at: 0)
         
         // Wire everything up
         
@@ -99,17 +99,17 @@ class Comic : Filter {
     }
     var gpuFilter: GPUImageFilterGroup { get { return filterGroup } }
     
-    func updateImage(newImage: UIImage) {
+    func updateImage(_ newImage: UIImage) {
         inkwell.setImageSize(newImage.pixelSize)
-        paperBlend.setInputSize(newImage.pixelSize, atIndex: 0)
-        paperBlend.forceProcessingAtSize(newImage.pixelSize)
+        paperBlend.setInputSize(newImage.pixelSize, at: 0)
+        paperBlend.forceProcessing(at: newImage.pixelSize)
     }
     
     func processImage() {
         paperTexture.processImage()
     }
     
-    func sliderChanged(index: Int, value: Float) {
+    func sliderChanged(_ index: Int, value: Float) {
         switch (index) {
         case 0: halftone.setThreshold(value); break
         case 1: halftone.setScale(value); break
@@ -123,10 +123,10 @@ class Comic : Filter {
 
 class ColorHalftone : GPUImageFilter {
     convenience override init() {
-        let path = NSBundle.mainBundle().pathForResource("ColorHalftone", ofType: "fragsh")!
-        let str = try! NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding)
+        let path = Bundle.main.path(forResource: "ColorHalftone", ofType: "fragsh")!
+        let str = try! NSString(contentsOfFile: path, encoding: String.Encoding.utf8.rawValue)
         
-        self.init(fragmentShaderFromString: str as String)
+        self.init(fragmentShaderFrom: str as String)
         
         setDotSize(0.4)
         setThreshold(0.7)
@@ -135,32 +135,32 @@ class ColorHalftone : GPUImageFilter {
         setScale(0.01)
     }
     
-    func setDotSize(value: Float) {
+    func setDotSize(_ value: Float) {
         setFloat(value, forUniformName: "dotSize")
     }
     
-    func setThreshold(value: Float) {
+    func setThreshold(_ value: Float) {
         setFloat(value, forUniformName: "threshold")
     }
     
-    func setStepThresholdMin(value: Float) {
+    func setStepThresholdMin(_ value: Float) {
         setFloat(value, forUniformName: "stepThresholdMin")
     }
     
-    func setStepThresholdMax(value: Float) {
+    func setStepThresholdMax(_ value: Float) {
         setFloat(value, forUniformName: "stepThresholdMax")
     }
     
-    func setScale(value: Float) {
+    func setScale(_ value: Float) {
         setFloat(value, forUniformName: "scale")
     }
 }
 
 class TextureBlend : GPUImageTwoInputFilter {
     convenience override init() {
-        let path = NSBundle.mainBundle().pathForResource("TextureBlend", ofType: "fragsh")!
-        let str = try! NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding)
+        let path = Bundle.main.path(forResource: "TextureBlend", ofType: "fragsh")!
+        let str = try! NSString(contentsOfFile: path, encoding: String.Encoding.utf8.rawValue)
         
-        self.init(fragmentShaderFromString: str as String)
+        self.init(fragmentShaderFrom: str as String)
     }
 }

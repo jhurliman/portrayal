@@ -108,11 +108,11 @@ class Dream : Filter {
     }
     var gpuFilter: GPUImageFilterGroup { get { return filterGroup } }
     
-    func updateImage(newImage: UIImage) {
+    func updateImage(_ newImage: UIImage) {
         edge.setImageSize(newImage.pixelSize)
     }
     
-    func sliderChanged(index: Int, value: Float) {
+    func sliderChanged(_ index: Int, value: Float) {
         let cgValue = CGFloat(value)
         
         switch (index) {
@@ -133,34 +133,34 @@ class Dream : Filter {
 // Darken blend with alpha preservation
 class DarkenBlend : GPUImageTwoInputFilter {
     convenience override init() {
-        let path = NSBundle.mainBundle().pathForResource("DarkenBlend", ofType: "fragsh")!
-        let str = try! NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding)
+        let path = Bundle.main.path(forResource: "DarkenBlend", ofType: "fragsh")!
+        let str = try! NSString(contentsOfFile: path, encoding: String.Encoding.utf8.rawValue)
         
-        self.init(fragmentShaderFromString: str as String)
+        self.init(fragmentShaderFrom: str as String)
     }
 }
 
 class LaplaceSketch : GPUImageFilter {
     convenience override init() {
-        let path = NSBundle.mainBundle().pathForResource("LaplaceSketch", ofType: "fragsh")!
-        let str = try! NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding)
+        let path = Bundle.main.path(forResource: "LaplaceSketch", ofType: "fragsh")!
+        let str = try! NSString(contentsOfFile: path, encoding: String.Encoding.utf8.rawValue)
         
-        self.init(fragmentShaderFromString: str as String)
+        self.init(fragmentShaderFrom: str as String)
         
         setImageSize(CGSize(width: 256, height: 256))
         setThreshold(4.0 / 255.0)
         setLuminanceOffset(0.8)
     }
     
-    func setImageSize(size: CGSize) {
+    func setImageSize(_ size: CGSize) {
         setSize(size, forUniformName: "imageSize")
     }
     
-    func setThreshold(value: Float) {
+    func setThreshold(_ value: Float) {
         setFloat(value, forUniformName: "threshold")
     }
     
-    func setLuminanceOffset(value: Float) {
+    func setLuminanceOffset(_ value: Float) {
         setFloat(value, forUniformName: "luminanceOffset")
     }
 }

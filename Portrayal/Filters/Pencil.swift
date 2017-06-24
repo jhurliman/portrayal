@@ -37,7 +37,7 @@ class Pencil : Filter {
     }
     var gpuFilter: GPUImageFilterGroup { get { return filter } }
     
-    func load(input: GPUImageOutput, output: GPUImageInput) {
+    func load(_ input: GPUImageOutput, output: GPUImageInput) {
         filter = PencilSketchFilter(imageSize: CGSize.zero,
             pencilTexture: pencilTexture)
         input.addTarget(filter)
@@ -59,7 +59,7 @@ class Pencil : Filter {
         pencilTexture.removeAllTargets()
     }
     
-    func updateImage(newImage: UIImage) {
+    func updateImage(_ newImage: UIImage) {
         filter.setImageSize(newImage.pixelSize)
         pencilTexture.addTarget(filter)
     }
@@ -68,7 +68,7 @@ class Pencil : Filter {
         pencilTexture.processImage()
     }
     
-    func sliderChanged(index: Int, value: Float) {
+    func sliderChanged(_ index: Int, value: Float) {
         let cgValue = CGFloat(value)
         
         switch (index) {

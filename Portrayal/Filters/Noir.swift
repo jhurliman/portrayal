@@ -34,7 +34,7 @@ class Noir : Filter {
     }
     var gpuFilter: GPUImageFilterGroup { get { return filterGroup } }
     
-    func sliderChanged(index: Int, value: Float) {
+    func sliderChanged(_ index: Int, value: Float) {
         switch (index) {
         case 0:
             let color = UIColor(hue: CGFloat(value), saturation: 1.0,
@@ -56,32 +56,32 @@ class Noir : Filter {
 
 class NoirFilter : GPUImageFilter {
     convenience override init() {
-        let path = NSBundle.mainBundle().pathForResource("Noir", ofType: "fragsh")!
-        let str = try! NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding)
+        let path = Bundle.main.path(forResource: "Noir", ofType: "fragsh")!
+        let str = try! NSString(contentsOfFile: path, encoding: String.Encoding.utf8.rawValue)
         
-        self.init(fragmentShaderFromString: str as String)
+        self.init(fragmentShaderFrom: str as String)
         
-        setColor(UIColor.redColor())
+        setColor(UIColor.red)
         setThreshold(0.2)
         setSmoothing(0.1)
         setContrast(1.4)
     }
     
-    func setColor(color: UIColor) {
-        let rgb = CGColorGetComponents(color.CGColor)
-        let vec3 = GPUVector3(one: GLfloat(rgb[0]), two: GLfloat(rgb[1]), three: GLfloat(rgb[2]))
+    func setColor(_ color: UIColor) {
+        let rgb = color.cgColor.components
+        let vec3 = GPUVector3(one: GLfloat((rgb?[0])!), two: GLfloat((rgb?[1])!), three: GLfloat((rgb?[2])!))
         self.setFloatVec3(vec3, forUniformName: "chromaKeyColor")
     }
     
-    func setThreshold(value: Float) {
+    func setThreshold(_ value: Float) {
         self.setFloat(value, forUniformName: "threshold")
     }
     
-    func setSmoothing(value: Float) {
+    func setSmoothing(_ value: Float) {
         self.setFloat(value, forUniformName: "smoothing")
     }
     
-    func setContrast(value: Float) {
+    func setContrast(_ value: Float) {
         self.setFloat(value, forUniformName: "contrast")
     }
 }
