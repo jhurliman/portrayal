@@ -24,6 +24,7 @@ typedef enum {
 @property(readonly, nonatomic) CGSize sizeInPixels;
 
 @property(nonatomic) BOOL enabled;
+@property(nonatomic) CGRect viewBounds;
 
 /** Handling fill mode
  

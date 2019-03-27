@@ -212,10 +212,8 @@ class MainViewController : UIViewController,
     
     // MARK: - UIImagePickerController Handlers
     
-    private func imagePickerController(_ picker: UIImagePickerController,
-        didFinishPickingMediaWithInfo info: [String: Any])
-    {
-        let fullImage = (info[UIImagePickerController.InfoKey.originalImage.rawValue] as! UIImage)
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let fullImage = (info[UIImagePickerController.InfoKey.originalImage] as! UIImage)
         largeInputImage = fullImage.resizeWithMaxDimension(IMAGE_SIZES[1])
         let image = fullImage.resizeTo(previewPixelSize(fullImage))
         
