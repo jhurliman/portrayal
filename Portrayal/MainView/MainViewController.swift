@@ -81,7 +81,7 @@ class MainViewController : UIViewController,
         animation.toValue = NSNumber(value: 1.0 as Float)
         animation.duration = 1.5
         animation.autoreverses = true
-        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         animation.repeatCount = 10
         animation.isRemovedOnCompletion = true
         view.layer.add(animation, forKey: "shadowOpacity")
@@ -212,10 +212,8 @@ class MainViewController : UIViewController,
     
     // MARK: - UIImagePickerController Handlers
     
-    func imagePickerController(_ picker: UIImagePickerController,
-        didFinishPickingMediaWithInfo info: [String: Any])
-    {
-        let fullImage = (info[UIImagePickerControllerOriginalImage] as! UIImage)
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let fullImage = (info[UIImagePickerController.InfoKey.originalImage] as! UIImage)
         largeInputImage = fullImage.resizeWithMaxDimension(IMAGE_SIZES[1])
         let image = fullImage.resizeTo(previewPixelSize(fullImage))
         
