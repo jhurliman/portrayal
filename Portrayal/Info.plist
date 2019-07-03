@@ -15,13 +15,17 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.0</string>
+	<string>1.0.2</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>4</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Portrayal applies custom filters to photos you take.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Portrayal wants to save your styled photos.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Portrayal needs access to your photos to apply custom styles.</string>
 	<key>UILaunchStoryboardName</key>
